@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Licenta',
+  title: 'CryptoHub',
   description: 'Next.js + Tailwind Setup',
 };
 
