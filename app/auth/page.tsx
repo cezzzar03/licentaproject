@@ -15,15 +15,14 @@ export default function Home() {
                 <div className="mt-auto flex justify-center">
                   <img src="/images/logo.png" alt="CH Logo" className="w-16 h-16 transition duration-300 hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]" />
                 </div>
+          {/*partea stanga a formularului cu un div care are alte div uri cu text*/}
           </div>
 
-          
           <div className="w-1/2 p-8 min-h-[400px]">
             
           </div>
       </div>
       {/* aici avem un div care are 2 divuri inauntru,unul pt text si celalalt pt formular */}
-
       </div>
   );
 }
