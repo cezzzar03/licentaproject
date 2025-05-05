@@ -20,6 +20,14 @@ export default function Home() {
     parolaLogin: "",
   });
 
+  //obiecte pt erori
+  const [numeError, setNumeError] = useState("");
+  const [prenumeError, setPrenumeError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [parolaError, setParolaError] = useState("");
+
+  
+
   return (
     //codul pt imaginea de fundal,div ul principal al paginii
     <div
@@ -115,9 +123,44 @@ export default function Home() {
             <form
                 className="space-y-5"
                 noValidate
-              onSubmit={(e) => {
+
+                onSubmit={(e) => {
                 e.preventDefault();
+
+                //verificare nume
+                if (!/^[A-ZĂÂÎ][a-zăâî]+(?:\s[A-ZĂÂÎ][a-zăâî]+)*$/.test(signupData.nume)) {
+                  setNumeError("Nume invalid.Trebuie să inceapă cu literă mare/să nu fie din cifre");
+                  return;
+                } else {
+                  setNumeError("");
+                }
+
+                //verificare prenume
+                if (!/^[A-ZĂÂÎ][a-zăâî]+(?:\s[A-ZĂÂÎ][a-zăâî]+)*$/.test(signupData.prenume)) {
+                  setPrenumeError("Prenume invalid.Trebuie să inceapă cu literă mare/să nu fie din cifre");
+                  return;
+                } else {
+                  setPrenumeError("");
+                }     
                 
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signupData.email)) {
+                  setEmailError("Email invalid. Asigură-te că are un singur @ și un domeniu valid");
+                  return;
+                } else {
+                  setEmailError("");
+                }
+                  
+                const parola = signupData.parola;
+                if (
+                  parola.length < 8 ||
+                  /\s/.test(parola) || 
+                  (parola.match(/[^A-Za-z0-9]/g) || []).length < 2 
+                ) {
+                  setParolaError("Parola trebuie să aibă cel puțin 8 caractere, fără spații și minim 2 caractere speciale");
+                  return;
+                } else {
+                  setParolaError("");
+                }
 
 
 
@@ -141,10 +184,18 @@ export default function Home() {
                   placeholder="Popescu"
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                   value={signupData.nume}
-                  onChange={(e) =>
-                    setsignupData((prev) => ({ ...prev, nume: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setsignupData((prev) => ({ ...prev, nume: value }));
+
+                    if (/^[A-ZĂÂÎ][a-zăâî]+(?:\s[A-ZĂÂÎ][a-zăâî]+)*$/.test(value)) {
+                      setNumeError(""); 
+                    }
+                  }} 
                   />
+                  {numeError && (
+                    <p className="mt-1 text-sm text-red-600">{numeError}</p>
+                  )}
               </div>
 
               {/* Prenume */}
@@ -158,11 +209,19 @@ export default function Home() {
                   name="prenume"
                   placeholder="Ion"
                   value={signupData.prenume}
-                  onChange={(e) =>
-                    setsignupData((prev) => ({ ...prev, prenume: e.target.value }))
-                  }  
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setsignupData((prev) => ({ ...prev, prenume: value }));
+
+                    if (/^[A-ZĂÂÎ][a-zăâî]+(?:\s[A-ZĂÂÎ][a-zăâî]+)*$/.test(value)) {
+                      setPrenumeError(""); 
+                    }
+                  }}  
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                />
+                  />
+                  {prenumeError && (
+                    <p className="mt-1 text-sm text-red-600">{prenumeError}</p>
+                  )}
               </div>
 
               {/* Email */}
@@ -176,11 +235,19 @@ export default function Home() {
                   name="email"
                   placeholder="exemplu@domeniu.com"
                   value={signupData.email}
-                  onChange={(e) =>
-                    setsignupData((prev) => ({ ...prev, email: e.target.value }))
-                  }  
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setsignupData((prev) => ({ ...prev, email: value }));
+
+                    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                      setEmailError("");
+                    }
+                  }} 
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
+                  />
+                  {emailError && (
+                    <p className="mt-1 text-sm text-red-600">{emailError}</p>
+                  )}
               </div>
 
               {/* Parolă */}
@@ -194,11 +261,23 @@ export default function Home() {
                   name="parola"
                   placeholder="Alege o parolă"
                   value={signupData.parola}
-                  onChange={(e) =>
-                    setsignupData((prev) => ({ ...prev, parola: e.target.value }))
-                  }     
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setsignupData((prev) => ({ ...prev, parola: value }));
+
+                    if (
+                      value.length >= 8 &&
+                      !/\s/.test(value) &&
+                      (value.match(/[^A-Za-z0-9]/g) || []).length >= 2
+                    ) {
+                      setParolaError("");
+                    }
+                  }}     
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
+                  />
+                  {parolaError && (
+                    <p className="mt-1 text-sm text-red-600">{parolaError}</p>
+                  )}
               </div>
 
                 {/* Texte pt conectare/inregistrare */}
