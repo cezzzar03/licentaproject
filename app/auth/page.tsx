@@ -1,9 +1,24 @@
 "use client";
 import { useState } from "react";
 
-//pt ca sign up sa apara primul setam state fals
+
 export default function Home() {
+  //pt ca sign up sa apara primul setam state fals
   const [isLogin, setIsLogin] = useState(false);
+
+  //obiect care retine valori introduse de utilizator in signup
+  const [signupData, setsignupData] = useState({
+    nume: "",
+    prenume: "",
+    email: "",
+    parola: "",
+  });
+
+ //obiect care retine valori introduse de utilizator in signup
+  const [loginData, setloginData] = useState({
+    emailLogin: "",
+    parolaLogin: "",
+  });
 
   return (
     //codul pt imaginea de fundal,div ul principal al paginii
@@ -28,12 +43,12 @@ export default function Home() {
         {/* partea dreapta a formularului cu sign up+log in */}
          <div className="w-1/2 p-8 min-h-[400px]">
           {isLogin ? (
-            /* ───────── Login Form ───────── */
+            /* ───────── Login ───────── */
             <form
               className="space-y-5"
               onSubmit={(e) => {
                 e.preventDefault();
-                // aici handleLogin()
+                console.log(loginData);
               }}
             >
               <h2 className="text-3xl font-semibold text-gray-800 mb-6">
@@ -48,8 +63,12 @@ export default function Home() {
                 <input
                   type="email"
                   id="emailLogin"
-                  name="email"
+                  name="emailLogin"
                   placeholder="exemplu@domeniu.com"
+                  value={loginData.emailLogin}
+                  onChange={(e) =>
+                    setloginData((prev) => ({ ...prev, emailLogin: e.target.value }))
+                  }
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -62,8 +81,12 @@ export default function Home() {
                 <input
                   type="password"
                   id="parolaLogin"
-                  name="parola"
+                  name="parolaLogin"
                   placeholder="Parola ta"
+                  value={loginData.parolaLogin}
+                  onChange={(e) =>
+                    setloginData((prev) => ({ ...prev, parolaLogin: e.target.value }))
+                  }
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -88,11 +111,17 @@ export default function Home() {
               </p>
             </form>
           ) : (
-            /* ───────── Sign Up Form ───────── */
+            /* ───────── Sign Up ───────── */
             <form
-              className="space-y-5"
+                className="space-y-5"
+                noValidate
               onSubmit={(e) => {
                 e.preventDefault();
+                
+
+
+
+                console.log(signupData);
                 setIsLogin(true);
               }}
             >
@@ -111,7 +140,11 @@ export default function Home() {
                   name="nume"
                   placeholder="Popescu"
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                />
+                  value={signupData.nume}
+                  onChange={(e) =>
+                    setsignupData((prev) => ({ ...prev, nume: e.target.value }))
+                  }
+                  />
               </div>
 
               {/* Prenume */}
@@ -124,6 +157,10 @@ export default function Home() {
                   id="prenume"
                   name="prenume"
                   placeholder="Ion"
+                  value={signupData.prenume}
+                  onChange={(e) =>
+                    setsignupData((prev) => ({ ...prev, prenume: e.target.value }))
+                  }  
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -138,6 +175,10 @@ export default function Home() {
                   id="email"
                   name="email"
                   placeholder="exemplu@domeniu.com"
+                  value={signupData.email}
+                  onChange={(e) =>
+                    setsignupData((prev) => ({ ...prev, email: e.target.value }))
+                  }  
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -152,6 +193,10 @@ export default function Home() {
                   id="parola"
                   name="parola"
                   placeholder="Alege o parolă"
+                  value={signupData.parola}
+                  onChange={(e) =>
+                    setsignupData((prev) => ({ ...prev, parola: e.target.value }))
+                  }     
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
