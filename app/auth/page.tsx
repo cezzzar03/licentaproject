@@ -25,6 +25,7 @@ export default function Home() {
   const [prenumeError, setPrenumeError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [parolaError, setParolaError] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   
   //functie care face legatura dintre frontend->backend
@@ -47,6 +48,8 @@ export default function Home() {
 
   //functie care verifica daca avem un cont valid in baza de date
   const handleLogin = async () => {
+    setLoginError(""); // resetăm eroarea
+
     const res = await fetch("http://localhost:3001/api/login", {
       method: "POST",
       headers: {
@@ -61,8 +64,11 @@ export default function Home() {
     const data = await res.json();
 
     if (res.ok) {
-      alert("✅ Autentificare reușită!");
-    }
+        setLoginError("");
+      } else {
+        setLoginError("Email sau parolă incorecte.");
+      }
+   
   };
 
   return (
@@ -91,6 +97,8 @@ export default function Home() {
             /* ───────── Login ───────── */
             <form
               className="space-y-5"
+              noValidate
+              
               onSubmit={(e) => {
                 e.preventDefault();
                 handleLogin();
@@ -134,6 +142,9 @@ export default function Home() {
                   }
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
+                {loginError && (
+                  <p className="text-red-600 text-sm mt-2">{loginError}</p>
+                )}
               </div>
 
               {/* Texte pt conectare/intregistrare */}
