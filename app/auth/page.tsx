@@ -27,6 +27,26 @@ export default function Home() {
   const [parolaError, setParolaError] = useState("");
 
   
+  //functie care face legatura dintre frontend->backend
+  const handleRegister = async () =>
+  {
+
+    //trimitem cerere de tip POST catre API
+    const res = await fetch("http://localhost:3001/api/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(signupData),
+    });
+
+
+    const data = await res.json();
+
+    if (res.ok) 
+      setIsLogin(true); 
+  }
+
 
   return (
     //codul pt imaginea de fundal,div ul principal al paginii
@@ -162,9 +182,7 @@ export default function Home() {
                   setParolaError("");
                 }
 
-
-
-                console.log(signupData);
+                handleRegister();
                 setIsLogin(true);
               }}
             >
