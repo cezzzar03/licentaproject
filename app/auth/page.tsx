@@ -30,7 +30,6 @@ export default function Home() {
   //functie care face legatura dintre frontend->backend
   const handleRegister = async () =>
   {
-
     //trimitem cerere de tip POST catre API
     const res = await fetch("http://localhost:3001/api/register", {
     method: "POST",
@@ -40,13 +39,31 @@ export default function Home() {
     body: JSON.stringify(signupData),
     });
 
-
     const data = await res.json();
 
     if (res.ok) 
       setIsLogin(true); 
   }
 
+  //functie care verifica daca avem un cont valid in baza de date
+  const handleLogin = async () => {
+    const res = await fetch("http://localhost:3001/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: loginData.emailLogin,
+        parola: loginData.parolaLogin,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("✅ Autentificare reușită!");
+    }
+  };
 
   return (
     //codul pt imaginea de fundal,div ul principal al paginii
@@ -76,7 +93,7 @@ export default function Home() {
               className="space-y-5"
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log(loginData);
+                handleLogin();
               }}
             >
               <h2 className="text-3xl font-semibold text-gray-800 mb-6">
