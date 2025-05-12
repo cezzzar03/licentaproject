@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   //pt ca sign up sa apara primul setam state fals
@@ -20,12 +20,13 @@ export default function Home() {
     parolaLogin: "",
   });
 
-  //obiecte pt erori
+  //obiecte pt erori/JWT router
   const [numeError, setNumeError] = useState("");
   const [prenumeError, setPrenumeError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [parolaError, setParolaError] = useState("");
   const [loginError, setLoginError] = useState("");
+  const router = useRouter();
 
   
   //functie care face legatura dintre frontend->backend
@@ -40,15 +41,13 @@ export default function Home() {
     body: JSON.stringify(signupData),
     });
 
-    const data = await res.json();
-
     if (res.ok) 
       setIsLogin(true); 
   }
 
   //functie care verifica daca avem un cont valid in baza de date
   const handleLogin = async () => {
-    setLoginError(""); // resetăm eroarea
+    setLoginError("");
 
     const res = await fetch("http://localhost:3001/api/login", {
       method: "POST",
@@ -62,9 +61,12 @@ export default function Home() {
     });
 
     const data = await res.json();
+    console.log(data);
 
-    if (res.ok) {
+     if (res.ok && data.success) {
+        localStorage.setItem("token", data.token); 
         setLoginError("");
+        router.push("/home"); 
       } else {
         setLoginError("Email sau parolă incorecte.");
       }

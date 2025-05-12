@@ -42,31 +42,45 @@ router.post('/register', async (req, res) => {
 module.exports = router;
 
 //ruta login
+const jwt = require('jsonwebtoken');
+
 router.post('/login', async (req, res) => {
-  const { email, parola } = req.body;
+    const { email, parola } = req.body;
 
-  if (!email || !parola) {
-    return res.status(400).json({ error: 'Email și parolă sunt necesare' });
-  }
-
-  try {
-    const utilizator = await prisma.utilizator.findUnique({
-      where: { email }
-    });
-
-    if (!utilizator) {
-      return res.status(400).json({ error: 'Email sau parolă incorecte' });
+    if (!email || !parola) {
+      return res.status(400).json({ error: 'Email și parolă sunt necesare' });
     }
 
-    const parolaValida = await bcrypt.compare(parola, utilizator.parola);
+    try {
+      const utilizator = await prisma.utilizator.findUnique({
+        where: { email }
+      });
 
-    if (!parolaValida) {
-      return res.status(400).json({ error: 'Email sau parolă incorecte' });
+      if (!utilizator) {
+        return res.status(400).json({ error: 'Email sau parolă incorecte' });
+      }
+
+      const parolaValida = await bcrypt.compare(parola, utilizator.parola);
+
+      if (!parolaValida) {
+        return res.status(400).json({ error: 'Email sau parolă incorecte' });
+      }
+
+      const token = jwt.sign(
+        { id: utilizator.id, email: utilizator.email },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: 'Autentificare reușită!',
+        token: token
+      });
+
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Eroare server. Încearcă din nou mai târziu.' });
     }
-
-    res.status(200).json({ message: 'Autentificare reușită' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Eroare la autentificare' });
-  }
-});
+  
+  });
