@@ -2,26 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const topics = [
-      'crypto',
-      'bitcoin',
-      'ethereum',
-      'blockchain',
-      'web3',
-      'nft',
-      'defi',
-      'altcoin',
-      'solana',
-      'binance',
-      'coinbase',
-      'crypto news',
-      'crypto market',
-      'crypto trading',
-      'stablecoin',
-      'ledger',
-      'crypto regulation',
-      'crypto security'
-    ][Math.floor(Math.random() * 18)];
+    const topics = ['crypto', 'bitcoin', 'blockchain'];
     const q = topics[Math.floor(Math.random() * topics.length)];
 
     const res = await fetch(
