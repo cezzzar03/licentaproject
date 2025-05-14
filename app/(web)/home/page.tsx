@@ -24,7 +24,6 @@ export default function HomePage() {
 
   //aici preluam cele mai bune monede prin coingecko API
   const [coins, setCoins] = useState([]);
-  const [lastUpdated, setLastUpdated] = useState('');
 
   useEffect(() => {
     const fetchCoins = async () => {
