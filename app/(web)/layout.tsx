@@ -11,7 +11,7 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
           </h1>
           <nav className="flex flex-col gap-10 mt-10 text-lg">
             <a href="/home" className="hover:text-blue-400">🏠 Pagina principală</a>
-            <a href="/lectii" className="hover:text-blue-400">📘 Lecții</a>
+            <a href="/lectii" className="hover:text-blue-400">📘 Introducere in lumea cripto</a>
             <a href="/quiz" className="hover:text-blue-400">❓ Quiz</a>
           </nav>
           <div className="mt-auto flex justify-center">
