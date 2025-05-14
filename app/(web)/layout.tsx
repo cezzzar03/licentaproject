@@ -22,9 +22,19 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         
-        <main className="flex-1 bg-gray-100 p-6 pl-64">
+        <main
+          className="flex-1 p-6 pl-64"
+          style={{
+            backgroundImage: 'url("/images/websitebackground.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            minHeight: '100vh',
+            backgroundRepeat: 'no-repeat'
+          }}
+        >
           {children}
         </main>
+
       </body>
     </html>
   );
