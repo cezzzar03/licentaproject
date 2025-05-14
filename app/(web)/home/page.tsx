@@ -101,15 +101,16 @@ export default function HomePage() {
                   <img src={coin.image} alt={coin.name} className="w-8 h-8" />
                   <div>
                     <p className="font-semibold">{coin.name} ({coin.symbol.toUpperCase()})</p>
-                    <p className="text-sm text-gray-500">${coin.current_price.toFixed(2)}</p>
                   </div>
                 </div>
-                <p className={`font-bold ${coin.price_change_percentage_24h > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                  {coin.price_change_percentage_24h?.toFixed(2)}%
-                </p>
+                <p className="text-sm text-gray-600">Capitalizare de piață: ${coin.market_cap.toLocaleString()}</p>
+                <p className="text-sm text-gray-500">Preț: ${coin.current_price.toFixed(2)}</p>
               </div>
             ))}
-          </div>
+        </div>
+        <p className="text-center text-xs text-gray-500 mt-4 italic">
+          ℹ️ Datele sunt actualizate la fiecare 24h prin CoinGecko.
+        </p>
         </motion.div>
 
     </main>
