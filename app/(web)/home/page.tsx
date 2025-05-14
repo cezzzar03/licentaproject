@@ -22,6 +22,31 @@ export default function HomePage() {
     fetchNews();
   }, []);
 
+  //aici preluam cele mai bune monede prin coingecko API
+  const [coins, setCoins] = useState([]);
+  const [lastUpdated, setLastUpdated] = useState('');
+
+  useEffect(() => {
+    const fetchCoins = async () => {
+      try {
+        const res = await fetch('/api/coins');
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setCoins(data);
+          const now = new Date();
+        }
+      } catch (err) {
+        console.error("Eroare CoinGecko:", err);
+      }
+    };
+
+    fetchCoins();
+
+    const interval = setInterval(fetchCoins, 60000); 
+
+    return () => clearInterval(interval);
+  }, []);
+
 
   return (
     <main className="flex flex-col items-center justify-start min-h-screen w-full p-6 gap-8">
@@ -36,7 +61,7 @@ export default function HomePage() {
         <h2 className="text-2xl font-bold mb-4 text-slate-800">📰 Știri relevante</h2>
         <div className="grid gap-4">
           {news.map((item: any, index: number) => (
-            <div key={index} className="bg-white p-4 rounded-md shadow flex gap-4">
+            <div key={index} className="bg-zinc-100 border border-zinc-300 p-4 rounded-xl shadow-sm hover:shadow-md transition flex gap-4">
               <img
                 src={item.image || "/images/fallback.jpg"}
                 alt={`Știre ${index + 1}`}
@@ -62,14 +87,30 @@ export default function HomePage() {
 
       {/* COINS */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        className="w-full max-w-4xl bg-white/80 p-6 rounded-xl shadow-md"
-      >
-        <h2 className="text-2xl font-bold mb-4 text-slate-800">💹 Top 10 Performing Coins of the Day</h2>
-        <p>📊 Vom adăuga aici lista celor mai performante monede.</p>
-      </motion.div>
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="w-full max-w-4xl bg-white/80 p-6 rounded-xl shadow-md"
+        >
+          <h2 className="text-2xl font-bold mb-4 text-slate-800">💹 Cele mai importante monede din Cripto</h2>
+
+          <div className="grid gap-4">
+            {coins.map((coin: any) => (
+              <div key={coin.id} className="bg-zinc-100 border border-zinc-300 p-4 rounded-xl shadow-sm hover:shadow-md transition flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <img src={coin.image} alt={coin.name} className="w-8 h-8" />
+                  <div>
+                    <p className="font-semibold">{coin.name} ({coin.symbol.toUpperCase()})</p>
+                    <p className="text-sm text-gray-500">${coin.current_price.toFixed(2)}</p>
+                  </div>
+                </div>
+                <p className={`font-bold ${coin.price_change_percentage_24h > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  {coin.price_change_percentage_24h?.toFixed(2)}%
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
     </main>
   );
