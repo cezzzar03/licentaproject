@@ -91,7 +91,7 @@ export default function HomePage() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="w-full max-w-4xl bg-white/80 p-6 rounded-xl shadow-md"
         >
-          <h2 className="text-2xl font-bold mb-4 text-slate-800">💹 Cele mai importante monede din Cripto</h2>
+          <h2 className="text-2xl font-bold mb-4 text-slate-800">💹 Cele mai actuale monede din Cripto</h2>
 
           <div className="grid gap-4">
             {coins.map((coin: any) => (
