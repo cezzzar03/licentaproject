@@ -27,25 +27,22 @@ export default function HomePage() {
 
   useEffect(() => {
     const fetchCoins = async () => {
-      try {
-        const res = await fetch('/api/coins');
-        const data = await res.json();
-        if (Array.isArray(data)) {
-          setCoins(data);
-          const now = new Date();
-        }
-      } catch (err) {
-        console.error("Eroare CoinGecko:", err);
-      }
+      const res = await fetch(`http://localhost:3001/api/coins?_=${Date.now()}`);
+      const data = await res.json();
+      console.log("🧠 FETCH NOU:", new Date().toLocaleTimeString());
+      console.log("💵 BTC:", data.data[0]?.current_price);
+      setCoins((prev) =>
+        JSON.stringify(prev) !== JSON.stringify(data.data) ? [...data.data] : prev
+      );      
     };
-
+    
     fetchCoins();
-
-    const interval = setInterval(fetchCoins, 60000); 
-
+  
+    const interval = setInterval(fetchCoins, 60000);
     return () => clearInterval(interval);
   }, []);
-
+  
+  
 
   return (
     <main className="flex flex-col items-center justify-start min-h-screen w-full p-6 gap-8">
@@ -94,22 +91,33 @@ export default function HomePage() {
           <h2 className="text-2xl font-bold mb-4 text-slate-800">💹 Cele mai actuale monede din Cripto</h2>
 
           <div className="grid gap-4">
-            {coins.map((coin: any) => (
-              <div key={coin.id} className="bg-zinc-100 border border-zinc-300 p-4 rounded-xl shadow-sm hover:shadow-md transition flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <img src={coin.image} alt={coin.name} className="w-8 h-8" />
-                  <div>
-                    <p className="font-semibold">{coin.name} ({coin.symbol.toUpperCase()})</p>
+              {coins.map((coin: any) => (
+                <div
+                  key={coin.id}
+                  className="bg-zinc-100 border border-zinc-300 p-4 rounded-xl shadow-sm hover:shadow-md transition flex items-center justify-between"
+                >
+                  {/* Nume + simbol + imagine */}
+                  <div className="flex items-center gap-4">
+                    <img src={coin.image} alt={coin.name} className="w-8 h-8" />
+                    <div>
+                      <p className="font-semibold">
+                        {coin.name} ({coin.symbol.toUpperCase()})
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Capitalizare + Preț */}
+                  <div className="text-right">
+                    <p className="text-sm text-gray-600">
+                      💰 Capitalizare: ${coin.market_cap.toLocaleString()}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      💵 Preț: ${coin.current_price.toFixed(2)}
+                    </p>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600">Capitalizare de piață: ${coin.market_cap.toLocaleString()}</p>
-                <p className="text-sm text-gray-500">Preț: ${coin.current_price.toFixed(2)}</p>
-              </div>
-            ))}
-        </div>
-        <p className="text-center text-xs text-gray-500 mt-4 italic">
-          ℹ️ Datele sunt actualizate la fiecare 24h prin CoinGecko.
-        </p>
+              ))}
+            </div>
         </motion.div>
 
     </main>
