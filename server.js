@@ -8,10 +8,14 @@ const authRoutes = require('./routes/authRoutes');
 
 app.use(cors());
 app.use(express.json());
-
 app.use('/api', authRoutes);
 
-// ✅ Cache logic
+app.listen(3001, () => {
+  console.log('✅ Server pornit pe http://localhost:3001');
+});
+
+
+//coingecko cache
 let coinCache = [];
 let lastUpdated = null;
 
@@ -30,7 +34,6 @@ async function updateCoinCache() {
     coinCache = res.data;
     lastUpdated = new Date().toISOString();
     console.log('✅ Coin cache actualizat:', lastUpdated);
-    console.log("⏱️ updateCoinCache apelat la:", new Date().toLocaleTimeString());
     console.log("💵 Nou preț BTC:", res.data[0].current_price);
 
   } catch (err) {
@@ -38,9 +41,8 @@ async function updateCoinCache() {
   }
 }
 
-
-updateCoinCache(); // rulează la pornire
-setInterval(updateCoinCache, 60000); // la fiecare 60 sec
+updateCoinCache();
+setInterval(updateCoinCache, 60000);
 
 app.get('/api/coins', (req, res) => {
   if (coinCache.length === 0) {
@@ -51,8 +53,4 @@ app.get('/api/coins', (req, res) => {
     updatedAt: lastUpdated,
     data: coinCache,
   });
-});
-
-app.listen(3001, () => {
-  console.log('✅ Server pornit pe http://localhost:3001');
 });

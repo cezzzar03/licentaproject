@@ -22,18 +22,20 @@ export default function HomePage() {
     fetchNews();
   }, []);
 
-  //aici preluam cele mai bune monede prin coingecko API
+  //aici preluam cele mai actuale monede prin coingecko API
   const [coins, setCoins] = useState([]);
 
   useEffect(() => {
     const fetchCoins = async () => {
-      const res = await fetch(`http://localhost:3001/api/coins?_=${Date.now()}`);
-      const data = await res.json();
-      console.log("🧠 FETCH NOU:", new Date().toLocaleTimeString());
-      console.log("💵 BTC:", data.data[0]?.current_price);
-      setCoins((prev) =>
-        JSON.stringify(prev) !== JSON.stringify(data.data) ? [...data.data] : prev
-      );      
+      try {
+        const res = await fetch(`http://localhost:3001/api/coins?_=${Date.now()}`);
+        const data = await res.json();
+        setCoins((prev) =>
+          JSON.stringify(prev) !== JSON.stringify(data.data) ? [...data.data] : prev
+        );
+      } catch (err) {
+        console.error("Eroare la preluarea monedelor:", err);
+      }  
     };
     
     fetchCoins();
@@ -41,7 +43,6 @@ export default function HomePage() {
     const interval = setInterval(fetchCoins, 60000);
     return () => clearInterval(interval);
   }, []);
-  
   
 
   return (
@@ -59,7 +60,7 @@ export default function HomePage() {
           {news.map((item: any, index: number) => (
             <div key={index} className="bg-zinc-100 border border-zinc-300 p-4 rounded-xl shadow-sm hover:shadow-md transition flex gap-4">
               <img
-                src={item.image || "/images/fallback.jpg"}
+                src={item.image}
                 alt={`Știre ${index + 1}`}
                 className="w-48 h-32 object-cover rounded-md"
               />
@@ -81,7 +82,7 @@ export default function HomePage() {
         </div>
       </motion.div>
 
-      {/* COINS */}
+      {/* Monede */}
       <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
