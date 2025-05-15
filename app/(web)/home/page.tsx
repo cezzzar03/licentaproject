@@ -91,33 +91,40 @@ export default function HomePage() {
           <h2 className="text-2xl font-bold mb-4 text-slate-800">💹 Cele mai actuale monede din Cripto</h2>
 
           <div className="grid gap-4">
-              {coins.map((coin: any) => (
-                <div
-                  key={coin.id}
-                  className="bg-zinc-100 border border-zinc-300 p-4 rounded-xl shadow-sm hover:shadow-md transition flex items-center justify-between"
-                >
-                  {/* Nume + simbol + imagine */}
-                  <div className="flex items-center gap-4">
-                    <img src={coin.image} alt={coin.name} className="w-8 h-8" />
-                    <div>
-                      <p className="font-semibold">
-                        {coin.name} ({coin.symbol.toUpperCase()})
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Capitalizare + Preț */}
-                  <div className="text-right">
-                    <p className="text-sm text-gray-600">
-                      💰 Capitalizare: ${coin.market_cap.toLocaleString()}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      💵 Preț: ${coin.current_price.toFixed(2)}
+            {coins.map((coin: any) => (
+              <div
+                key={coin.id}
+                className="bg-zinc-100 border border-zinc-300 p-4 rounded-xl shadow-sm hover:shadow-md transition flex items-center justify-between"
+              >
+                
+                <div className="flex items-center gap-4">
+                  <img src={coin.image} alt={coin.name} className="w-8 h-8" />
+                  <div>
+                    <p className="font-semibold">
+                      {coin.name} ({coin.symbol.toUpperCase()})
                     </p>
                   </div>
                 </div>
-              ))}
-            </div>
+
+                
+                <div className="text-right">
+                  <p className="text-sm text-gray-600">
+                    💰 Capitalizare: ${coin.market_cap.toLocaleString()}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    💵 Preț: ${coin.current_price.toFixed(2)}
+                  </p>
+                  <p
+                    className={`text-sm font-semibold ${
+                      coin.price_change_percentage_24h > 0 ? 'text-green-600' : 'text-red-500'
+                    }`}
+                  >
+                    📊 {coin.price_change_percentage_24h?.toFixed(2)}%
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
     </main>
