@@ -1,4 +1,5 @@
 import "../globals.css";
+import Livedate from "../(web)/livedate"
 
 export default function WebLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -22,10 +23,15 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
             />
           </div>
         </div>
+
+        <div className="fixed top-4 right-4">
+          <Livedate />
+        </div>
         
         <main className="flex-1 p-6 pl-64">
           {children}
         </main>
+
       </body>
     </html>
   );
