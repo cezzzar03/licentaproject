@@ -15,10 +15,11 @@ datasource db {
 }
 
 model Utilizator {
-  id        Int      @id @default(autoincrement())
-  nume      String
-  prenume   String
-  email     String   @unique
-  parola    String
-  createdAt DateTime @default(now())
+  id         Int      @id @default(autoincrement())
+  nume       String
+  prenume    String
+  email      String   @unique
+  parola     String
+  createdAt  DateTime @default(now())
+  quizPassed Boolean  @default(false) // 🔥 câmpul nou
 }

@@ -1,10 +1,36 @@
+'use client';
+
 import "../globals.css";
-import Livedate from "../(web)/livedate"
+import { useEffect, useState } from "react";
+import Livedate from "../(web)/livedate";
 
 export default function WebLayout({ children }: { children: React.ReactNode }) {
+  const [quizUnlocked, setQuizUnlocked] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    fetch("/api/me", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.quizPassed === true) {
+          setQuizUnlocked(true);
+        }
+      })
+      .catch((err) => {
+        console.error("Eroare la fetch /api/me:", err);
+      });
+  }, []);
+
   return (
     <html lang="en">
-        <body className="bg-zinc-100 flex min-h-screen">
+      <body className="bg-zinc-100 flex min-h-screen">
         {/* Sidebar */}
         <div className="fixed top-0 left-0 h-screen w-64 bg-gradient-to-b from-slate-900 to-blue-900 text-white p-6 flex flex-col gap-6">
           <h1 className="text-2xl font-bold mb-4 text-white transition duration-300 hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]">
@@ -14,6 +40,9 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
             <a href="/home" className="hover:text-blue-400">🏠 Pagina principală</a>
             <a href="/lectii" className="hover:text-blue-400">📘 Ce este cripto?</a>
             <a href="/quiz" className="hover:text-blue-400">🧠 Quiz</a>
+            {quizUnlocked && (
+              <a href="/trading" className="hover:text-green-400 font-semibold">📈 Tranzacționare</a>
+            )}
           </nav>
           <div className="mt-auto flex justify-center">
             <img
@@ -27,11 +56,10 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
         <div className="fixed top-4 right-4">
           <Livedate />
         </div>
-        
+
         <main className="flex-1 p-6 pl-64">
           {children}
         </main>
-
       </body>
     </html>
   );
