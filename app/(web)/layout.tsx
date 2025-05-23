@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from "framer-motion";
 import "../globals.css";
 import { useEffect, useState } from "react";
 import Livedate from "../(web)/livedate";
@@ -41,7 +42,15 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
             <a href="/lectii" className="hover:text-blue-400">📘 Ce este cripto?</a>
             <a href="/quiz" className="hover:text-blue-400">🧠 Quiz</a>
             {quizUnlocked && (
-              <a href="/trading" className="hover:text-green-400 font-semibold">📈 Tranzacționare</a>
+              <motion.a
+                href="/trading"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="hover:text-green-400 font-semibold"
+              >
+                📈 Tranzacționare
+              </motion.a>
             )}
           </nav>
           <div className="mt-auto flex justify-center">
