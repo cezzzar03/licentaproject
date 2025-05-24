@@ -218,7 +218,7 @@ export default function TradingPage() {
           <h2 className="text-2xl font-semibold">📊 Indicatori</h2>
           <p>
             Vreau să încep prin a spune ce indicatori folosesc eu în piață. Evident, poți adăuga și alții, dar pentru mine aceștia rămân cei mai buni.
-            Folosiți corect, e important să înțelegi cum funcționează un indicator.
+            Folosiți corect evident, e important să înțelegi cum funcționează un indicator.
           </p>
         </section>
 
@@ -226,10 +226,175 @@ export default function TradingPage() {
         <section className="bg-gray-50 p-5 rounded-md shadow-sm space-y-4">
           <h2 className="text-2xl font-semibold">📈 RSI</h2>
           <p>
+            RSI este un indicator cu "lag". Adică face o medie de 14 candele anterioare, așadar reacționează pe baza a ceea ce s-a întâmplat deja.
+            Însă, folosit corect, este extrem de puternic.
+          </p>
+          <p>
+            Voi lăsa un videoclip cu RSI explicat clar, de altfel
+            <a 
+              href="https://www.youtube.com/watch?v=gBKOEN93J8E" 
+              className="text-blue-600 underline mx-1"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              de aici
+            </a>
+            am învățat și eu cum funcționează corect.
           </p>
         </section>
 
+        {/* Secțiunea 11 */}
+        <section className="bg-gray-50 p-5 rounded-md shadow-sm space-y-4">
+          <h2 className="text-2xl font-semibold">🌥️ Ichimoku</h2>
+          <p>
+            Spre deosebire de RSI, Ichimoku nu are lag. Așadar, pentru mine este superior lui RSI. Însă este și mai greu de înțeles.
+            Există diferite cărți legate de Ichimoku, însă pentru a-l înțelege complet necesită o muncă titanică.
+            Iar Ichimoku, combinat cu ce prezint eu aici – chiar și doar la un nivel de bază – funcționează foarte bine.
+          </p>
+          <p>
+            La fel, voi lăsa un videoclip despre Ichimoku{" "}
+            <a 
+              href="https://www.youtube.com/watch?v=Y9QM8WRRWzE&t=595s" 
+              className="text-blue-600 underline"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              aici
+            </a>. Este explicat frumos, fix pentru a-l înțelege cum funcționează.
+          </p>
+        </section>
 
+        {/* Secțiunea 12 */}
+        <section className="bg-gray-50 p-5 rounded-md shadow-sm space-y-4">
+          <h2 className="text-2xl font-semibold">🔄 Tipurile de preț din piață</h2>
+          <p>
+            În piață există doar 2 tipuri de preț:
+          </p>
+          <p>
+            Mișcare impulsivă în sus sau în jos. Iar când spun impulsivă mă refer la valurile Elliott.
+            Dacă reușești să identifici corect o astfel de mișcare, este cel mai ușor de tranzacționat.
+            Problema este că ele, în general, nu apar destul de des, așadar în piață sunt mai rare. Dar dacă reușești să o identifici, ai dat lovitura.
+          </p>
+
+          <img 
+            src="/images/MiscareImpulsiva.png" 
+            alt="Impuls pic" 
+            className="w-full rounded-lg shadow-md"
+          />
+
+          <p>
+            Aici, după această mișcare, puteai deschide o tranzacție de cumpărare oriunde după acest val.
+            Invalidarea este sub originea valului, așadar acolo trebuie plasat stop loss-ul.
+          </p>
+
+          <img 
+            src="/images/ModelImpuls.png" 
+            alt="ModelImpuls pic" 
+            className="w-full rounded-lg shadow-md"
+          />
+
+          <p>
+            Această mișcare pe timp mic a dus la o reacție în lanț pe timp mai mare... de aici Bitcoin a continuat să tot urce.
+          </p>
+          <p>
+            Celălalt tip de mișcare este cea laterală. Aceasta este cel mai des întâlnită în piață și are loc cam 90% din timp.
+            Aici vânzătorii și cumpărătorii sunt indeciși unde să ducă prețul, până când o parte cedează.
+          </p>
+          <p>
+            Aici trebuie să te poziționezi MEREU la extremitățile consolidării, în sus sau în jos.
+            Nu sunt grele de tranzacționat, însă necesită atenție unde te plasezi.
+            Poziția ta poate fi ușor oprită, ca mai apoi să continue în direcția unde tu știai că va merge.
+          </p>
+          <p>
+            Aici există și un mic șiretlic. Aceste consolidări au niște zone deasupra sau dedesubtul lor, numite zone de supply sau demand.
+            Arată ca niște V-uri și, cu timpul, le vei putea identifica.
+          </p>
+
+          <img 
+            src="/images/Consolidare.png" 
+            alt="Consolidare pic" 
+            className="w-full rounded-lg shadow-md"
+          />
+
+          <p>
+            În această poză am avut un ordin de tranzacționare chiar la nivelul superior al zonei de demand. Stop loss-ul se pune dedesubtul zonei identificate.
+          </p>
+          <p>
+            Atât! Nu este nimic super complicat în teorie. Cele 2 tipuri de preț necesită un stil diferit de tranzacționare, însă nu este nimic mai complicat de atât.
+          </p>
+        </section>
+
+        {/* Secțiunea 13 */}
+        <section className="bg-gray-50 p-5 rounded-md shadow-sm space-y-4">
+          <h2 className="text-2xl font-semibold">💡 Sfaturi și observații</h2>
+          <p>
+            Ghidul nu este mai mult de atât. Este simplu, curat și nu este încărcat.
+          </p>
+          <p>
+            În atât constă strategia mea. Nu am nimic complicat...
+          </p>
+          <p>
+            Ce este complicat însă este să te ții de acest plan cu strictețe. De multe ori l-am încălcat, făcând greșeli stupide.
+            Eu operez pe timp mare, care de altfel este și cel mai important. Pot aștepta săptămâni sau luni ca să iau o tranzacție și să o completez.
+          </p>
+          <p>
+            Nu contează cantitatea, ci calitatea lor. Psihologia și modul în care gestionezi riscul sunt la fel de importante ca și strategia.
+            Mai jos voi lăsa conturile oamenilor de la care am învățat pe gratis, urmărindu-le strategiile.
+          </p>
+
+          <p>
+            Pentru Elliott și piață în general am învățat de{" "}
+            <a 
+              href="https://x.com/crediblecrypto" 
+              className="text-blue-600 underline"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              aici
+            </a>. Este, după părerea mea, cel mai bun analist din acest spațiu cripto. Oferă doar informații gratuite.
+          </p>
+
+          <p>
+            Iar pentru Ichimoku de{" "}
+            <a 
+              href="https://x.com/DoctorCatX" 
+              className="text-blue-600 underline"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              aici
+            </a>. Este persoana care înțelege cel mai bine cum funcționează indicatorul.
+          </p>
+
+          <p>
+            Iar acesta este contul{" "}
+            <a 
+              href="https://x.com/CezFzv" 
+              className="text-blue-600 underline"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              meu
+            </a>, unde postez conținut educativ zilnic.
+          </p>
+
+          <p>
+            Îmi poți scrie acolo dacă ai mai multe curiozități.
+          </p>
+        </section>
+
+          {/* Secțiunea 14 */}
+          <section className="bg-gray-50 p-5 rounded-md shadow-sm space-y-4">
+            <h2 className="text-2xl font-semibold">🎉 Felicitări!</h2>
+            <p>
+              Mult succes în acest drum.
+              Nu este ușor și puțini îl parcurg, însă este ceva care merită măcar încercat. În viață cel mai bine e să încerci, iar dacă nu a reușit, să fii împăcat că măcar ai încercat.
+            </p>
+            <p className="text-xl font-bold text-center">
+              GOOD LUCK!! 🚀
+            </p>
+          </section>
+          
       </div>
     </div>
   );
