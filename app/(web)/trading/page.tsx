@@ -111,7 +111,125 @@ export default function TradingPage() {
           <p>
             Dar fii fără griji, indiferent dacă piața urcă sau coboară, noi putem profita. Acesta este un aspect important de înțeles. Noi putem face bani indiferent dacă piața urcă sau coboară!
           </p>
+          <p>
+            Așadar, noi trebuie mereu să avem în plan direcția generală a lui Bitcoin înainte să luăm o tranzacție, fie pe un termen lung, fie pe un termen scurt.
+          </p>
+          <p>
+            Părerea multora este că prețul e mereu influențat de știri. Însă este foarte greșit. După ceva timp petrecut în piață, pot spune clar că graficul ne arată tot ce trebuie să știm.
+          </p>
+          <p>
+            Faptul că prețul uneori face ceva la care nu mă aștept nu este decât lipsa mea de înțelegere a graficului la momentul respectiv.
+          </p>
+          <p>
+            Cu aceste lucruri în minte, vom aprofunda puțin cum funcționează piața.
+          </p>
         </section>
+
+        {/* Secțiunea 6 */}
+        <section className="bg-gray-50 p-5 rounded-md shadow-sm space-y-4">
+          <h2 className="text-2xl font-semibold">📈 Ciclurile pieței</h2>
+          <p>
+            Este o vorbă cum că istoria nu se repetă, dar rimează. Exact așa funcționează piața, are o regulă bine definită care se repetă într-un fel sau altul, ducând la același deznodământ.
+          </p>
+          <p>
+            Deoarece Bitcoin dictează piața, dacă știm cum se desfășoară, putem înțelege totul.
+          </p>
+          <p>
+            Cum ne dăm seama de asta? Ei bine, aici niște oameni mai deștepți decât noi au găsit o metodă pe care noi doar trebuie să o învățăm.
+            Se aplică în toate piețele, așadar dacă te interesează alt spațiu, ca și bursa, are același principiu.
+          </p>
+        </section>
+
+        {/* Secțiunea 7 */}
+        <section className="bg-gray-50 p-5 rounded-md shadow-sm space-y-4">
+          <h2 className="text-2xl font-semibold">🌊 Elliott Waves</h2>
+          <p>
+            Ce sunt aceste valuri Elliott?
+          </p>
+          <p>
+            Piața are o psihologie proprie. Ce vedem pe un grafic sunt practic emoțiile celor care tranzacționează, fie pe un interval mic de timp, fie pe unul mare.
+            Acestea formează "valuri". Piața se mișcă în valuri. Atâta timp cât noi ne lăsăm duși de val și nu înotăm împotriva curentului, nu vom avea nicio problemă.
+          </p>
+
+          <img 
+            src="/images/Elliott.png" 
+            alt="Elliott pic" 
+            className="w-full rounded-lg shadow-md"
+          />
+          
+          <p>
+            Această carte este tot ce ai nevoie pentru a înțelege aceste valuri mai bine și pentru a le putea identifica pe un grafic.
+          </p>
+          <p>
+            În momentul actual, Bitcoin se află înspre finalul ciclului care a început chiar de la creația sa.
+          </p>
+
+          <img 
+            src="/images/BitcoinEW.png" 
+            alt="BtcEW pic" 
+            className="w-full rounded-lg shadow-md"
+          />
+
+          <p>
+            Este aici finalul lui?
+          </p>
+          <p>
+            Nu, bineînțeles. Acest ciclu va continua să se întâmple. Pe măsură ce avansăm în timp, volatilitatea acestuia se reduce de la ciclu la ciclu.
+            Însă va aduce în continuare suficiente oportunități dacă ai răbdare în piață.
+          </p>
+          <p>
+            Voi explica sumar aici aceste valuri. Ele încep de la cel mai mic interval de timp. O mișcare în sus este formată din 5 valuri. Aceste 5 valuri formează, la rândul lor, un val mai mare, și tot așa.
+            Așadar, cât timp Bitcoin există, el va continua să urmeze acest principiu de valuri. În poza de mai sus, Bitcoin va forma curând 5 valuri complete pe un timp mai mare. Acestea practic formează un val mare pe un timp și mai mare.
+          </p>
+          <p>
+            Ce urmează după?
+          </p>
+          <p>
+            După 1 vine 2. Așadar, va veni un val 2, care este corectiv, deci o cădere care probabil va fi destul de amplă. O oportunitate bună pentru cine este atent și are răbdare...
+          </p>
+          <p>
+            Acum vine un lucru interesant. Mereu, la finalul primelor valuri, adică 1 și 3, a avut loc o rotație de capital în restul pieței. Acest lucru este numit "altcoin season".
+            Adică o perioadă când restul pieței performează mai bine decât Bitcoin. Sigur, alte monede pot performa și cu alte ocazii, nu doar aici, însă ele sunt excepții.
+          </p>
+          <p>
+            O strategie bună este, spre finalul acestor valuri, să începi să rotești capital din Bitcoin în restul monedelor, iar apoi să ieși din piață, până când vom vedea pe grafic când este timpul să intrăm iar.
+          </p>
+          <p>
+            Pare simplu în teorie, nu? Însă în practică este foarte greu să rămâi disciplinat și să aplici toate astea.
+          </p>
+          <p>
+            Acum că am înțeles cum funcționează piața cripto, putem intra în detaliu cum să tranzacționăm piața.
+          </p>
+        </section>
+
+
+        {/* Secțiunea 8 */}
+        <section className="bg-gray-50 p-5 rounded-md shadow-sm space-y-4">
+          <h2 className="text-2xl font-semibold">🔍 Cum analizăm piața?</h2>
+          <p>
+            Evident, există multe metode prin care poți analiza piața. Nu există un mod corect sau greșit. Trebuie să găsești ceva care funcționează.
+            Eu te voi ghida prin a înțelege cele mai importante aspecte și ce a mers pentru mine. Însă strategia tu o vei implementa pe baza sfaturilor mele și pe baza experienței pe care o vei acumula în timp.
+            E un drum lung, dar care aduce recompense pe măsură.
+          </p>
+        </section>
+
+        {/* Secțiunea 9 */}
+        <section className="bg-gray-50 p-5 rounded-md shadow-sm space-y-4">
+          <h2 className="text-2xl font-semibold">📊 Indicatori</h2>
+          <p>
+            Vreau să încep prin a spune ce indicatori folosesc eu în piață. Evident, poți adăuga și alții, dar pentru mine aceștia rămân cei mai buni.
+            Folosiți corect, e important să înțelegi cum funcționează un indicator.
+          </p>
+        </section>
+
+        {/* Secțiunea 10 */}
+        <section className="bg-gray-50 p-5 rounded-md shadow-sm space-y-4">
+          <h2 className="text-2xl font-semibold">📈 RSI</h2>
+          <p>
+          </p>
+        </section>
+
+
       </div>
     </div>
   );
