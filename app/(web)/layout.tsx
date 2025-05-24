@@ -9,9 +9,15 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
   const [quizUnlocked, setQuizUnlocked] = useState(false);
 
   useEffect(() => {
+    const saved = localStorage.getItem("quizUnlocked");
+    if (saved === "true") {
+      setQuizUnlocked(true);
+      return; 
+    }
+  
     const token = localStorage.getItem("token");
     if (!token) return;
-
+  
     fetch("/api/me", {
       method: "GET",
       headers: {
@@ -21,13 +27,14 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
       .then((res) => res.json())
       .then((data) => {
         if (data.quizPassed === true) {
+          localStorage.setItem("quizUnlocked", "true");
           setQuizUnlocked(true);
         }
       })
       .catch((err) => {
         console.error("Eroare la fetch /api/me:", err);
       });
-  }, []);
+  }, []);  
 
   return (
     <html lang="en">
