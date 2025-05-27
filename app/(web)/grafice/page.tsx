@@ -56,7 +56,7 @@ export default function SymbolSearchChart() {
         />
         <button
           onClick={handleSearch}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="text-white px-4 py-2 rounded bg-gradient-to-r from-slate-900 to-blue-900 hover:from-slate-800 hover:to-blue-800 transition"
         >
           Caută simbol
         </button>
