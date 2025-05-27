@@ -109,7 +109,7 @@ router.post('/forgot-password', async (req, res) => {
       { expiresIn: "15m" }
     );
 
-    const resetLink = `http://localhost:3000/resetare-parola?token=${token}`;
+    const resetLink = `http://localhost:3000/reset-password?token=${token}`;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -138,5 +138,45 @@ router.post('/forgot-password', async (req, res) => {
     res.status(500).json({ success: false, message: "Eroare server." });
   }
 });
+
+
+// ───── RESET PASSWORD ─────
+router.post("/reset-password", async (req, res) => {
+  const { token, parolaNoua } = req.body;
+
+  if (!token || !parolaNoua) {
+    return res.status(400).json({ success: false, message: "Token sau parolă lipsă." });
+  }
+
+  try {
+    // 1. Verificăm tokenul JWT
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const email = decoded.email;
+
+    // 2. Verificăm dacă userul există
+    const utilizator = await prisma.utilizator.findUnique({
+      where: { email },
+    });
+
+    if (!utilizator) {
+      return res.status(404).json({ success: false, message: "Utilizator inexistent." });
+    }
+
+    // 3. Hash-uim noua parolă
+    const hashedParola = await bcrypt.hash(parolaNoua, 10);
+
+    // 4. Update parolă în DB
+    await prisma.utilizator.update({
+      where: { email },
+      data: { parola: hashedParola },
+    });
+
+    return res.status(200).json({ success: true, message: "Parola a fost resetată cu succes!" });
+  } catch (err) {
+    console.error("Eroare resetare:", err);
+    return res.status(401).json({ success: false, message: "Token invalid sau expirat." });
+  }
+});
+
 
 module.exports = router;
