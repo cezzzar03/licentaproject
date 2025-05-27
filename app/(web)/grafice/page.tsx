@@ -19,20 +19,21 @@ export default function GraficePage() {
 
     script.onload = () => {
       new (window as any).TradingView.widget({
-        container_id: 'tradingview_btc_chart',
-        width: '100%',
+        container_id: "tradingview_btc_chart",
+        width: "100%",
         height: 700,
         symbol: selectedSymbol,
-        interval: 'D',
-        timezone: 'Etc/UTC',
-        theme: 'dark',
-        style: '1',
-        locale: 'ro',
-        toolbar_bg: '#f1f3f6',
+        interval: "D",
+        timezone: "Etc/UTC",
+        theme: "dark",
+        style: "1",
+        locale: "ro",
+        toolbar_bg: "#f1f3f6",
         enable_publishing: false,
         hide_top_toolbar: false,
+        hide_side_toolbar: false,
         save_image: false,
-      });
+      });      
     };
 
     const chartDiv = document.getElementById('tradingview_btc_chart');
