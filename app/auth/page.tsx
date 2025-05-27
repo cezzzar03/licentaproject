@@ -29,24 +29,25 @@ export default function Home() {
   const router = useRouter();
   const [forgotEmail, setForgotEmail] = useState("");
   const [forgotEmailError, setForgotEmailError] = useState("");
+  const [forgotSuccessMsg, setForgotSuccessMsg] = useState("");
+
 
 
   
   //functie care face legatura dintre frontend->backend
-  const handleRegister = async () =>
-  {
+  const handleRegister = async () => {
     //trimitem cerere de tip POST catre API
     const res = await fetch("http://localhost:3001/api/register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(signupData),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signupData),
     });
 
-    if (res.ok) 
-      setIsLogin(true); 
-  }
+    if (res.ok)
+      setIsLogin(true);
+  };
 
   //functie care verifica daca avem un cont valid in baza de date
   const handleLogin = async () => {
@@ -66,15 +67,41 @@ export default function Home() {
     const data = await res.json();
     console.log(data);
 
-     if (res.ok && data.success) {
-        localStorage.setItem("token", data.token); 
-        setLoginError("");
-        router.push("/home"); 
-      } else {
-        setLoginError("Email sau parolă incorecte.");
-      }
+    if (res.ok && data.success) {
+      localStorage.setItem("token", data.token);
+      setLoginError("");
+      router.push("/home");
+    } else {
+      setLoginError("Email sau parolă incorecte.");
+    }
    
   };
+
+  const handleForgotPassword = async () => {
+    try {
+      const res = await fetch("http://localhost:3001/api/forgot-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: forgotEmail }),
+      });
+  
+      const data = await res.json();
+  
+      if (res.ok && data.success) {
+        setForgotSuccessMsg("Email de resetare trimis cu succes!");
+        setForgotEmailError("");
+      } else {
+        setForgotSuccessMsg(""); // curățăm orice succes anterior
+        setForgotEmailError(data.message || "Eroare la trimiterea emailului.");
+      }
+    } catch (err) {
+      console.error("Eroare la cererea de resetare:", err);
+      setForgotSuccessMsg("");
+      setForgotEmailError("Eroare server. Încearcă mai târziu.");
+    }
+  };   
 
   return (
     //codul pt imaginea de fundal,div ul principal al paginii
@@ -375,8 +402,7 @@ export default function Home() {
                   }
                 
                   setForgotEmailError(""); // curățăm dacă e valid
-                
-                  // handleForgotPassword(); // vei face tu în Pasul 3
+                  handleForgotPassword(); // vei face tu în Pasul 3
                 }}
                 
               >
@@ -404,6 +430,9 @@ export default function Home() {
                   />
                   {forgotEmailError && (
                     <p className="mt-1 text-sm text-red-600">{forgotEmailError}</p>
+                  )}
+                  {forgotSuccessMsg && (
+                    <p className="mt-1 text-sm text-green-600">{forgotSuccessMsg}</p>
                   )}
                 </div>
             
