@@ -1,16 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-const coins = [
-  { name: 'BTC', symbol: 'BINANCE:BTCUSDT' },
-  { name: 'ETH', symbol: 'BINANCE:ETHUSDT' },
-  { name: 'XRP', symbol: 'BINANCE:XRPUSDT' },
-  { name: 'SOL', symbol: 'BINANCE:SOLUSDT' },
-  { name: 'ADA', symbol: 'BINANCE:ADAUSDT' },
-];
-
-export default function GraficePage() {
-  const [selectedSymbol, setSelectedSymbol] = useState('BINANCE:BTCUSDT');
+export default function SymbolSearchChart() {
+  const [symbol, setSymbol] = useState("BINANCE:BTCUSDT");
+  const [input, setInput] = useState("");
+  const [lastTriedSymbol, setLastTriedSymbol] = useState("BTCUSDT");
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -19,10 +13,10 @@ export default function GraficePage() {
 
     script.onload = () => {
       new (window as any).TradingView.widget({
-        container_id: "tradingview_btc_chart",
+        container_id: "tv_chart",
         width: "100%",
         height: 700,
-        symbol: selectedSymbol,
+        symbol: symbol,
         interval: "D",
         timezone: "Etc/UTC",
         theme: "dark",
@@ -33,35 +27,46 @@ export default function GraficePage() {
         hide_top_toolbar: false,
         hide_side_toolbar: false,
         save_image: false,
-      });      
+      });
     };
 
-    const chartDiv = document.getElementById('tradingview_btc_chart');
-    if (chartDiv) chartDiv.innerHTML = ''; 
+    const chartDiv = document.getElementById('tv_chart');
+    if (chartDiv) chartDiv.innerHTML = '';
 
     document.body.appendChild(script);
-  }, [selectedSymbol]);
+  }, [symbol]);
+
+  const handleSearch = () => {
+    const formatted = input.trim().toUpperCase();
+    if (formatted) {
+      setSymbol(`BINANCE:${formatted}`);
+      setLastTriedSymbol(formatted);
+    }
+  };
 
   return (
-    <div className="p-4 min-h-screen flex flex-col">
-      <h1 className="text-2xl font-bold mb-4">📈 Grafic Monede Live</h1>
+    <div className="p-6">
+      <div className="mb-6 flex gap-4">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Ex: BTCUSDT, ETHUSDT, DOGEUSDT"
+          className="border px-4 py-2 rounded w-64"
+        />
+        <button
+          onClick={handleSearch}
+          className="bg-blue-600 text-white px-4 py-2 rounded"
+        >
+          Caută simbol
+        </button>
+      </div>
 
-      <div id="tradingview_btc_chart" className="w-full mb-6" style={{ minHeight: '700px' }} />
+      <div id="tv_chart" style={{ minHeight: "700px" }} />
 
-      <div className="flex justify-center gap-4">
-        {coins.map((coin) => (
-          <button
-            key={coin.name}
-            onClick={() => setSelectedSymbol(coin.symbol)}
-            className={`px-4 py-2 rounded font-bold border ${
-              selectedSymbol === coin.symbol
-                ? 'bg-blue-600 text-white'
-                : 'bg-white text-blue-600 border-blue-600'
-            } transition`}
-          >
-            {coin.name}
-          </button>
-        ))}
+      <div className="mt-4 text-sm text-gray-600 text-center max-w-xl mx-auto">
+        ℹ️ Dacă simbolul <span className="font-bold">{lastTriedSymbol}</span> nu este listat pe Binance
+        sau nu este suportat de TradingView, graficul nu va apărea. Asigură-te că ai introdus corect simbolul!
       </div>
     </div>
   );
