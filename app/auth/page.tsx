@@ -167,6 +167,16 @@ export default function Home() {
                   Înregistrează-te
                 </button>
               </p>
+              <p className="text-sm text-center text-gray-500 mt-2">
+                Ți-ai uitat parola?{" "}
+                <button
+                  type="button"
+                  onClick={() => setIsLogin(null)}
+                  className="text-blue-600 font-medium hover:underline"
+                >
+                  Resetează aici
+                </button>
+              </p>
             </form>
           ) : (
             /* ───────── Sign Up ───────── */
