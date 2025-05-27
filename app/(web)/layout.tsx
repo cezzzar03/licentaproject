@@ -48,6 +48,7 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
             <a href="/home" className="hover:text-blue-400">🏠 Pagina principală</a>
             <a href="/lectii" className="hover:text-blue-400">📘 Ce este cripto?</a>
             <a href="/quiz" className="hover:text-blue-400">🧠 Quiz</a>
+            <a href="/grafice" className="hover:text-blue-400">📊 Grafice</a>
             {quizUnlocked && (
               <motion.a
                 href="/trading"
