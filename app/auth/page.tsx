@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   //pt ca sign up sa apara primul setam state fals
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState<true | false | null>(false);
 
   //obiect care retine valori introduse de utilizator in signup
   const [signupData, setsignupData] = useState({
@@ -27,6 +27,9 @@ export default function Home() {
   const [parolaError, setParolaError] = useState("");
   const [loginError, setLoginError] = useState("");
   const router = useRouter();
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotEmailError, setForgotEmailError] = useState("");
+
 
   
   //functie care face legatura dintre frontend->backend
@@ -95,7 +98,7 @@ export default function Home() {
 
         {/* partea dreapta a formularului cu sign up+log in */}
          <div className="w-1/2 p-8 min-h-[400px]">
-          {isLogin ? (
+          {isLogin == true ? (
             /* ───────── Login ───────── */
             <form
               className="space-y-5"
@@ -178,7 +181,7 @@ export default function Home() {
                 </button>
               </p>
             </form>
-          ) : (
+          ) : isLogin == false ? (
             /* ───────── Sign Up ───────── */
             <form
                 className="space-y-5"
@@ -357,10 +360,74 @@ export default function Home() {
                 </button>
               </p>
             </form>
-          )}
+            ) : (
+              // FORMULAR RESETARE PAROLĂ 
+              <form
+                className="space-y-5"
+                noValidate
+                onSubmit={(e) => {
+                  e.preventDefault();
+                
+                  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(forgotEmail);
+                  if (!isValidEmail) {
+                    setForgotEmailError("Emailul introdus nu este valid.");
+                    return;
+                  }
+                
+                  setForgotEmailError(""); // curățăm dacă e valid
+                
+                  // handleForgotPassword(); // vei face tu în Pasul 3
+                }}
+                
+              >
+                <h2 className="text-3xl font-semibold text-gray-800 mb-6">Resetare parolă</h2>
+            
+                <div className="mb-5">
+                  <label htmlFor="forgotEmail" className="block text-sm font-medium text-gray-700">
+                    Introdu emailul tău
+                  </label>
+                  <input
+                    type="email"
+                    id="forgotEmail"
+                    name="forgotEmail"
+                    placeholder="exemplu@domeniu.com"
+                    value={forgotEmail}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setForgotEmail(value);
+                    
+                      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                        setForgotEmailError("");
+                      }
+                    }}
+                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  />
+                  {forgotEmailError && (
+                    <p className="mt-1 text-sm text-red-600">{forgotEmailError}</p>
+                  )}
+                </div>
+            
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+                >
+                  Trimite email de resetare
+                </button>
+            
+                <p className="text-sm text-center text-gray-500 mt-4">
+                  Ți-ai amintit parola?{" "}
+                  <button
+                    type="button"
+                    onClick={() => setIsLogin(true)}
+                    className="text-blue-600 font-medium hover:underline"
+                  >
+                    Conectează-te
+                  </button>
+                </p>
+              </form>
+            )}
         </div>
 
-        
       </div>
     </div>
   );
