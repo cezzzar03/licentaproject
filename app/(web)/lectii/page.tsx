@@ -306,6 +306,15 @@ export default function LectiiPage() {
         <p className="font-semibold">
           Ai ajuns la finalul lecțiilor! Dacă ai parcurs tot conținutul până aici, e momentul perfect să-ți testezi cunoștințele cu un quiz rapid. La finalul lui ai parte de un bonus! 🔎
         </p>
+        <p className="text-sm text-gray-600">
+          Bibliografie: <a href="https://academy.binance.com/ro/start-here" 
+            target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+            Ghid pentru începători – blockchain și criptomonede (Binance Academy)
+          </a>; <a href="https://www.investopedia.com/terms/s/smart-contracts.asp" 
+            target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+            „What Are Smart Contracts on the Blockchain and How They Work?” – Investopedia
+          </a>.
+        </p>
       </div>
 
     </div>
