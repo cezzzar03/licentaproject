@@ -21,5 +21,5 @@ model Utilizator {
   email      String   @unique
   parola     String
   createdAt  DateTime @default(now())
-  quizPassed Boolean  @default(false) // 🔥 câmpul nou
+  quizPassed Boolean  @default(false)
 }
