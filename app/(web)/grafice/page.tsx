@@ -26,7 +26,7 @@ export default function SymbolSearchChart() {
         enable_publishing: false,
         hide_top_toolbar: false,
         hide_side_toolbar: false,
-        save_image: false,
+        save_image: true,
       });
     };
 
